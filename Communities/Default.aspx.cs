@@ -25,7 +25,7 @@ public partial class _Default : System.Web.UI.Page
 
             key = (int)uKey;
             Session["userKey"] = key;
-            Response.Redirect("Donation.aspx");
+            Response.Redirect("DonorPage.aspx");
 
         }
         else
