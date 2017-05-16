@@ -16,10 +16,13 @@ public interface IGrantService
     bool RegisterPerson(PersonInfo pi);
 
     [OperationContract]
-    List<GrantRequest> GrantRequestByPerson(string PersonLastName);
+    List<GrantRequest> GetGrants();
+
+    //[OperationContract]
+    //List<GrantReview> GetGrantReviews();
 
     [OperationContract]
-    List<GrantReview> GetGrants();
+    bool NewGrant(GrantRequest r);
 
 }
 

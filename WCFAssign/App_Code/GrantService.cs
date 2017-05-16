@@ -29,4 +29,65 @@ public class GrantService : IGrantService
         }
         return grants;
     }
+
+    //public List<GrantReview> GetGrantReviews(int grantkey)
+    //{
+    //    var grts = from g in db.GrantReviews
+    //               from gr in db.People
+    //               where g.GrantRequestKey==grantkey
+    //               select g;
+
+
+    //}
+
+    
+
+    public int Login(string user, string password)
+    {
+        int key = 0;
+        int result = db.usp_Login(user, password);
+        if (result != -1)
+        {
+            var userKey = (from k in db.People
+                          where k.PersonEmail.Equals(user)
+                          select k.PersonKey).FirstOrDefault();
+            key = (int)userKey;
+        }
+
+        return key;
+    }
+
+    public bool NewGrant(GrantRequest r)
+    {
+        bool result = true;
+        try
+        {
+
+            GrantReview grantrev = new GrantReview();
+            grantrev.GrantRequest = r;
+            grantrev.GrantRequestStatus = "Pending";
+            grantrev.GrantReviewDate = DateTime.Now;
+
+            db.GrantRequests.Add(r);
+            db.GrantReviews.Add(grantrev);
+            db.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            result = false;
+        }
+        return result;
+    }
+
+    public bool RegisterPerson(PersonInfo pi)
+    {
+        bool result = true;
+        int reg = db.usp_Register(pi.lastname,
+            pi.firstname, pi.email, pi.password, pi.ApartmentNumber, 
+            pi.Street, pi.City, pi.State, 
+            pi.Zipcode, pi.HomePhone, pi.WorkPhone);
+
+        return result;
+    }
+
 }
