@@ -1,0 +1,24 @@
+﻿body {
+
+    background-color: antiquewhite
+}
+
+p{
+    font-family: Arial;
+    font-size: 14px;
+    color: darkblue;
+
+}
+
+h1{
+    font-family:Arial;
+    color: darkblue;
+    text-decoration: underline;
+
+}
+h2 {
+    font-family: Arial;
+    font-size: 20px;
+    color: darkblue;
+    text-decoration: underline;
+}
